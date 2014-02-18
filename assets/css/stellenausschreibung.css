@@ -1,0 +1,12 @@
+#list .position-public{color:#2b93d1}
+.position-round-element h3{background-color:#0f3a50;padding:12px;color:#fff}
+li.position-list-element{background-color:#333;color:#fff}
+.position-list-view-container{padding:0}
+#nav-tabs{padding-left:15px}
+.caption p{margin-bottom:0}
+#list .position-list-element h3{font-size:18px;margin-top:0}
+.panel.affix{top:80px;width:calc(16.200000000000003%)}
+.position-application-element .closed h4 a{color:#808080}
+.position-application-element .closed img{-webkit-filter:grayscale(100%);filter:grayscale(100%)}
+.single-element-container{float:right}
+#list>div{height:400px;overflow:auto}

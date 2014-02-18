@@ -4,10 +4,11 @@ positionsApp.module 'Controller', (PositionsController, App, Backbone, Marionett
 		constructor: ->
 
 		start: ->
-			createView = new positionsApp.View.CreatePosition()
+			console.log positionsApp
+			createView = new positionsApp.Views.CreatePosition()
 			createView.show()
 			App.vent.on 'position:add', (position) ->
-				that.positions.add position
+				alert "halleluja"
 
 
 

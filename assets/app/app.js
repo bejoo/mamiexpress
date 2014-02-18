@@ -4,6 +4,8 @@
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+  positionsApp = new Backbone.Marionette.Application;
+
   Bejoo.sapiURL = window.Bejoo.sapiurl + "organisation/";
 
   Handlebars.registerHelper('printDate', function(date) {
@@ -15,14 +17,16 @@
   };
 
   positionsApp.module('Models', function(Models, App, Backbone, Marionette, $, _) {
-    var _ref, _ref1;
-    Models.Position = (function(_super) {
+    var _ref;
+    return Models.Position = (function(_super) {
       __extends(Position, _super);
 
       function Position() {
         _ref = Position.__super__.constructor.apply(this, arguments);
         return _ref;
       }
+
+      Position.prototype.url = "http://mamiexpress-sapi.bejoo.com/position";
 
       Position.prototype.parse = function(pos) {
         pos.from = new Date(pos.from);
@@ -33,56 +37,6 @@
       return Position;
 
     })(Backbone.Model);
-    return Models.Positions = (function(_super) {
-      __extends(Positions, _super);
-
-      function Positions() {
-        _ref1 = Positions.__super__.constructor.apply(this, arguments);
-        return _ref1;
-      }
-
-      Positions.prototype.model = Models.Position;
-
-      Positions.prototype.url = "" + Bejoo.sapiURL + "position";
-
-      Positions.prototype.comparator = function(a, b) {
-        if (a.get('from') > b.get('from')) {
-          return 1;
-        } else {
-          return -1;
-        }
-      };
-
-      return Positions;
-
-    })(Backbone.Collection);
-  });
-
-  positionsApp = new Backbone.Marionette.Application;
-
-  positionsApp.module('Controller', function(PositionsController, App, Backbone, Marionette, $, _) {
-    PositionsController.Controller = (function(_super) {
-      __extends(Controller, _super);
-
-      function Controller() {}
-
-      Controller.prototype.start = function() {
-        var createView;
-        createView = new positionsApp.View.CreatePosition();
-        createView.show();
-        return App.vent.on('position:add', function(position) {
-          return that.positions.add(position);
-        });
-      };
-
-      return Controller;
-
-    })(Marionette.Controller);
-    return PositionsController.addInitializer(function() {
-      var controller;
-      controller = new PositionsController.Controller;
-      return controller.start();
-    });
   });
 
   positionsApp.module('Views', function(Views, App, Backbone) {
@@ -200,6 +154,36 @@
     })(Marionette.View);
   });
 
+  positionsApp.module('Controller', function(PositionsController, App, Backbone, Marionette, $, _) {
+    PositionsController.Controller = (function(_super) {
+      __extends(Controller, _super);
+
+      function Controller() {}
+
+      Controller.prototype.start = function() {
+        var createView;
+        console.log(positionsApp);
+        createView = new positionsApp.Views.CreatePosition();
+        createView.show();
+        return App.vent.on('position:add', function(position) {
+          return alert("halleluja");
+        });
+      };
+
+      return Controller;
+
+    })(Marionette.Controller);
+    return PositionsController.addInitializer(function() {
+      var controller;
+      controller = new PositionsController.Controller;
+      return controller.start();
+    });
+  });
+
   positionsApp.start();
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=app.map
+*/
